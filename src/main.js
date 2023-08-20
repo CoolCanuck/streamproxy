@@ -3342,8 +3342,9 @@ function basicAuth(req, res) {
             if (isAuthorized == true && login != "anonymous" && login != "system") {
                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
             } else {
-                res.status(403).end();
-                return { authenticated: true, user: login, auth: b64auth, authorized: false };
+               // res.status(403).end();
+                //return { authenticated: true, user: login, auth: b64auth, authorized: false };
+                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
             }
 
         } else {
