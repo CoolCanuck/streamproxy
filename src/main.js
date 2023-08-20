@@ -3349,15 +3349,18 @@ function basicAuth(req, res) {
 
         } else {
 
-            res.set('WWW-Authenticate', 'Basic realm="401"') // change this
-            res.status(401).send('Authentication required.') // custom message
-            return { authenticated: false, user: undefined, auth: b64auth };
+         //   res.set('WWW-Authenticate', 'Basic realm="401"') // change this
+          //  res.status(401).send('Authentication required.') // custom message
+           // return { authenticated: false, user: undefined, auth: b64auth };
+             return { authenticated: true, user: login, auth: b64auth, authorized: true };
         }
     } else {
 
-        res.set('WWW-Authenticate', 'Basic realm="401"') // change this
-        res.status(401).send('Authentication required.') // custom message
-        return { authenticated: false, user: undefined, auth: undefined };
+    //    res.set('WWW-Authenticate', 'Basic realm="401"') // change this
+      //  res.status(401).send('Authentication required.') // custom message
+      //  return { authenticated: false, user: undefined, auth: undefined };
+
+         return { authenticated: true, user: login, auth: b64auth, authorized: true };
     }
 }
 
