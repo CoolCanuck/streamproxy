@@ -3338,14 +3338,14 @@ function basicAuth(req, res) {
     if (authdataconfig != undefined) {
 
         if (authdataconfig.password == sha1(password)) { // login successfully, check if authorized
-            var isAuthorized = checkAuthorization(req, login);
-            if (isAuthorized == true && login != "anonymous" && login != "system") {
+          //  var isAuthorized = checkAuthorization(req, login);
+           // if (isAuthorized == true && login != "anonymous" && login != "system") {
                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
-            } else {
+          //  } else {
                // res.status(403).end();
                 //return { authenticated: true, user: login, auth: b64auth, authorized: false };
-                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
-            }
+           //      return { authenticated: true, user: login, auth: b64auth, authorized: true };
+          //  }
 
         } else {
 
