@@ -3321,7 +3321,7 @@ function basicAuth(req, res) {
 
     if ((req.headers.authorization == undefined || req.headers.authorization == "") && req.path != "/login") {
         user = "anonymous";
-       // var isAuthorized = checkAuthorization(req, user);
+        //var isAuthorized = checkAuthorization(req, user);
        // if (isAuthorized == true) {
             return { authenticated: true, user: user, auth: undefined, authorized: true };
        // }
