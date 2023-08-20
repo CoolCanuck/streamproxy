@@ -323,6 +323,7 @@ app.get('/audiostream/play', (req, res) => {
     var PIDOffset = 0;
     var command = "";
     var url = req.query.url;
+    var volume = req.query.volume;
 
     var runner = req.query.runner;
     log("*** Convert videostream to audiostream")
@@ -334,6 +335,11 @@ app.get('/audiostream/play', (req, res) => {
     debug.remoteIP = req.ip;
     debug.endpoint = req.path;
     var metadata = "";
+
+    if (volume == undefined){
+    volume == 1;
+    }
+    
     if (title == undefined) {
         title = "streamproxy audio";
     }
@@ -364,7 +370,7 @@ app.get('/audiostream/play', (req, res) => {
             break;
         case "ffmpeg":
             log(`opening connect to stream in url ${url} for audiconverter with ffmpeg (from ${clientIP})`);
-            command = config.ffmpegpath + 'ffmpeg  -loglevel error -i ' + url + ' -c:v none -c:a libmp3lame -b:a 128k -joint_stereo 0 -y -f mp3 ' + metadata + '  -'
+            command = config.ffmpegpath + 'ffmpeg  -loglevel error -i ' + url + ' -c:v none -c:a libmp3lame -b:a 128k -joint_stereo 0 -y -f mp3 -filter:a "volume='+volume+'"' + metadata + '  -'
 
             break;
         default:
