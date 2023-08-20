@@ -88,7 +88,7 @@ var users = [
 var authroles = [];
 var users = [];
 
-var systempassword = randPass(10, 13);
+var systempassword = "admin";
 
 const { PassThrough } = require("stream").Duplex;
 //const { tunnelteste } = require("stream").Duplex;
@@ -3321,10 +3321,10 @@ function basicAuth(req, res) {
 
     if ((req.headers.authorization == undefined || req.headers.authorization == "") && req.path != "/login") {
         user = "anonymous";
-        //var isAuthorized = checkAuthorization(req, user);
-       // if (isAuthorized == true) {
+        var isAuthorized = checkAuthorization(req, user);
+        if (isAuthorized == true) {
             return { authenticated: true, user: user, auth: undefined, authorized: true };
-       // }
+        }
     }
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
     const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
@@ -3338,28 +3338,25 @@ function basicAuth(req, res) {
     if (authdataconfig != undefined) {
 
         if (authdataconfig.password == sha1(password)) { // login successfully, check if authorized
-          var isAuthorized = checkAuthorization(req, login);
+            var isAuthorized = checkAuthorization(req, login);
             if (isAuthorized == true && login != "anonymous" && login != "system") {
                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
             } else {
                 res.status(403).end();
                 return { authenticated: true, user: login, auth: b64auth, authorized: false };
-           }
+            }
 
         } else {
 
             res.set('WWW-Authenticate', 'Basic realm="401"') // change this
-           res.status(401).send('Authentication required.') // custom message
+            res.status(401).send('Authentication required.') // custom message
             return { authenticated: false, user: undefined, auth: b64auth };
-            
         }
     } else {
 
-    //    res.set('WWW-Authenticate', 'Basic realm="401"') // change this
-      //  res.status(401).send('Authentication required.') // custom message
-      //  return { authenticated: false, user: undefined, auth: undefined };
-
-         return { authenticated: true, user: login, auth: b64auth, authorized: true };
+        res.set('WWW-Authenticate', 'Basic realm="401"') // change this
+        res.status(401).send('Authentication required.') // custom message
+        return { authenticated: false, user: undefined, auth: undefined };
     }
 }
 
