@@ -3338,7 +3338,7 @@ function basicAuth(req, res) {
     if (authdataconfig != undefined) {
 
         if (authdataconfig.password == sha1(password)) { // login successfully, check if authorized
-          /var isAuthorized = checkAuthorization(req, login);
+          var isAuthorized = checkAuthorization(req, login);
             if (isAuthorized == true && login != "anonymous" && login != "system") {
                 return { authenticated: true, user: login, auth: b64auth, authorized: true };
             } else {
