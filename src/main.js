@@ -3321,10 +3321,10 @@ function basicAuth(req, res) {
 
     if ((req.headers.authorization == undefined || req.headers.authorization == "") && req.path != "/login") {
         user = "anonymous";
-        var isAuthorized = checkAuthorization(req, user);
-        if (isAuthorized == true) {
+       // var isAuthorized = checkAuthorization(req, user);
+       // if (isAuthorized == true) {
             return { authenticated: true, user: user, auth: undefined, authorized: true };
-        }
+       // }
     }
     const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
     const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
