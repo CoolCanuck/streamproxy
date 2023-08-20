@@ -343,7 +343,7 @@ app.get('/audiostream/play', (req, res) => {
     if (title == undefined) {
         title = "streamproxy audio";
     }
-    metadata = `-metadata icy-aim="N/A" -metadata icy-br=128 -metadata icy-genre="misc" -metadata icy-icq="N/A" -metadata icy-irc="N/A" -metadata icy-name="streamproxy" -metadata icy-prebuffer=64000 -metadata icy-pub=1 -metadata StreamTitle="${title}" -metadata title="${title}"`;
+    metadata = ``;
 
     if (runner == undefined) {
         if (checkIfstreamlinkCanHandle(url) == true) {
